@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0a0a0f;
-  --color-foreground: #f5f5f5;
-  --color-primary: #CC0000;
-  --color-primary-light: #FF1A1A;
-  --color-card: #1a1a2e;
-  --color-card-hover: #25254a;
-  --color-muted: #888899;
-  --color-border: #2a2a3e;
+  --color-background: #050510;
+  --color-foreground: #f0f0f5;
+  --color-primary: #FF1100;
+  --color-primary-light: #FF4433;
+  --color-primary-glow: #FF110040;
+  --color-card: #0d0d1f;
+  --color-card-hover: #151533;
+  --color-muted: #7777aa;
+  --color-border: #1a1a3e;
+  --color-accent: #00E5FF;
   --font-display: 'Orbitron', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
@@ -21,24 +23,49 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
   ::selection {
     background: var(--color-primary);
     color: white;
   }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #050510; }
+  ::-webkit-scrollbar-thumb { background: #2a2a4e; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #CC0000; }
 }
 
 @layer utilities {
-  .text-gradient-red {
-    background: linear-gradient(135deg, #CC0000, #FF4444);
+  .text-gradient-fire {
+    background: linear-gradient(135deg, #FF1100 0%, #FF6B35 50%, #FF1100 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, #00E5FF, #00B8D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .glow-red {
+    box-shadow: 0 0 30px rgba(255,17,0,0.15), 0 0 60px rgba(255,17,0,0.05);
+  }
+  .glow-cyan {
+    box-shadow: 0 0 30px rgba(0,229,255,0.15), 0 0 60px rgba(0,229,255,0.05);
+  }
   .bg-grid {
-    background-image: 
-      linear-gradient(rgba(204,0,0,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(204,0,0,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
+    background-image: linear-gradient(rgba(255,17,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,17,0,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .bg-noise {
+    position: relative;
+  }
+  .card-hover-lift {
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .card-hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(255,17,0,0.1);
   }
 }
