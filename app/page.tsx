@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronDownIcon, ArrowRightIcon, PlayIcon } from '@heroicons/react/24/outline';
@@ -33,6 +33,15 @@ export default function HomePage() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Pre-compute HUD particle positions to avoid SSR hydration mismatch
+  const particles = useMemo(() => Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    left: `${10 + ((i * 137 + 59) % 80)}%`,
+    top: `${10 + ((i * 251 + 31) % 80)}%`,
+    dur: 2 + ((i * 73) % 3),
+    delay: ((i * 197) % 3),
+  })), []);
 
   return (
     <div className="overflow-x-hidden">
@@ -83,26 +92,15 @@ export default function HomePage() {
           />
         </div>
 
-        {/* HUD particles */}
+        {/* HUD particles — deterministic positions to avoid SSR mismatch */}
         <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-          {[...Array(8)].map((_, i) => (
+          {particles.map((p) => (
             <motion.div
-              key={i}
+              key={p.id}
               className="absolute w-[2px] h-[2px] rounded-full bg-cyan-400/60"
-              style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-              }}
-              animate={{
-                opacity: [0, 0.8, 0],
-                scale: [0, 1, 0],
-              }}
-              transition={{
-                duration: 2 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 3,
-                ease: 'easeInOut',
-              }}
+              style={{ left: p.left, top: p.top }}
+              animate={{ opacity: [0, 0.8, 0], scale: [0, 1, 0] }}
+              transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: 'easeInOut' }}
             />
           ))}
         </div>
@@ -432,6 +430,7 @@ export default function HomePage() {
                 </Link>
                 <Link href="/products" className="px-10 py-4 border border-white/10 hover:border-cyan-400/30 text-gray-400 hover:text-white font-bold rounded-lg text-sm tracking-[0.15em] transition-all duration-500">
                   浏览产品
+
                 </Link>
               </div>
             </div>
