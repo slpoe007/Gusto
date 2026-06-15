@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Gusto</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/css/bootstrap-5.0.0-beta1.min.css" />
+    <link rel="stylesheet" href="/static/css/swiper.min.css">
+    <link rel="stylesheet" href="/static/css/style.css"/>
+    <link rel="stylesheet" href="/static/css/animate.css"/>
+    <script src="/static/js/jquery.js"></script>
+    
+</head>
+<body>
+<header class="header header-6">
+    <div class="align-items-center">
+        <div class="col-lg-12 pl-190 pr-190">
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="/cn/">
+                    <img src="/static/images/logo.png" alt="Gusto" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent6" aria-controls="navbarSupportedContent6" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="toggler-icon"></span>
+                    <span class="toggler-icon"></span>
+                    <span class="toggler-icon"></span>
+                </button>
+
+                <div class="menu collapse navbar-collapse sub-menu-bar">
+                    <ul id="nav6" class="navbar-nav margin-right-150">
+                        <li class="nav-item">
+                            <a class="page-scroll active" href="/cn/">首页</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll " href="/cn/about.html">关于我们</a>
+                            <div class="nav-dropdown">
+                                <a href="/cn/about.html#CompanyProfile">公司简介</a>
+                                <a href="/cn/about.html#ContactUS">联系我们</a>
+                                <a href="/cn/about.html#SocialMedia">社交媒体</a>
+                                <a href="/cn/about.html#OnlineStore">在线商城</a>
+                                <a href="/cn/about.html#Recruitment">招聘</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll " href="/cn/products.html">产品中心</a>
+                            <div class="nav-dropdown">
+                                <a href="/cn/brands.html">品牌</a>
+                                <a href="/cn/RaceCars.html">赛车</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll " href="/cn/rd.html">研发</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll " href="/cn/services.html">服务</a>
+                            <div class="nav-dropdown">
+                                                                <a href="/cn/servicesd/adminrace_support.html">比赛支持</a>
+                                                                <a href="javascript:;">汽车租赁</a>
+                                                                <a href="/cn/servicesd/training.html">培训</a>
+                                                                <a href="/cn/servicesd/activity_support.html">活动支持</a>
+                                                                <a href="/cn/servicesd/store_service.html">商店服务</a>
+                                                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll " href="/cn/technical.html">技术支持</a>
+                            <div class="nav-dropdown">
+                                <a href="/cn/download.html">下载</a>
+                                <a href="/cn/technical.html#CommonProblem">常见问题</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll " href="/cn/news.html">新闻</a>
+                            <div class="nav-dropdown">
+                                <a href="/cn/news.html">全部新闻</a>
+                                <a href="/cn/CompanyNews.html">公司新闻</a>
+                                <a href="/cn/RacingNews.html">赛车新闻</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="header-action d-flex">
+                    <a href="/" class="lang"><i class="icon1"></i>EN</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<section class="search-box">
+    <div class="col-lg-12 pl-190 pr-190">
+        <div class="row">
+            <div class="col-7">
+                <a href="/cn/" class="search-a"><img src="/static/images/icon2.png" /></a>
+            </div>
+            <div class="col-2">
+                <div class="search-b">
+                    <form id="search" action="/index/index/search.html" method="get">
+                        <a href="javascript:void(0);" class="search-b_a do_search"><img src="/static/images/icon3.png" /></a>
+                        <input type="text" class="search-b_b" name="q" placeholder="Search">
+                    </form>
+                    <script>
+                        $(".do_search").click(function(){
+                            $("#search").submit();
+                        })
+                    </script>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="search-c">
+                                        <a href="https://weibo.com/u/1884127993" target="_blank"><img src="/static/images/m2.png" /></a>
+                                        <a href="https://www.douyin.com/user/MS4wLjABAAAArW8C-uF89AkuTUjp1H9ipWztbjDWvoF8mK1a3Rv3_oA" target="_blank"><img src="/static/images/m3.png" /></a>
+                                        <a href="https://space.bilibili.com/519797158" target="_blank"><img src="/static/images/m4.png" /></a>
+                                        <a href="https://www.facebook.com/gusto.motorsport" target="_blank"><img src="/static/images/m5.png" /></a>
+                                        <a href="https://www.instagram.com/gustoengineering/" target="_blank"><img src="/static/images/m6.png" /></a>
+                                        <a href="https://www.youtube.com/@gustoengineering4927" target="_blank"><img src="/static/images/m8.png" /></a>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="banner-box">
+    <div class="swiper-container swiper-container-banner">
+        <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                <img src="/uploads/20240704/840345fe682dc714f7d844c86a330952.png" alt="Gusto" />
+                <a href="" class="swiper-more">更多 &gt;</a>
+            </div>
+                        <div class="swiper-slide">
+                <img src="/uploads/20240704/414042a738c254f148d0d471f117af10.png" alt="Gusto" />
+                <a href="" class="swiper-more">更多 &gt;</a>
+            </div>
+                        <div class="swiper-slide">
+                <img src="/uploads/20241014/a4fe3de6bbd938afa10a98333bfdda23.png" alt="Gusto" />
+                <a href="" class="swiper-more">更多 &gt;</a>
+            </div>
+                    </div>
+        <div class="swiper-pagination swiper-pagination-banner"></div>
+    </div>
+</section>
+<section class="pinpai-box">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="section-title text-center">
+                    <h3 class="pinpai-title mt-40 mb-15 wow fadeInUp" data-wow-delay=".2s">品牌中心</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo1.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo2.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo3.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo4.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo5.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo7.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo8.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo9.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo10.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo11.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo12.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo13.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo14.png" alt=""/></a>
+                </div>
+            </div>
+                        <div class="col-2_4">
+                <div class="icon wow fadeInUp" data-wow-delay=".2s">
+                    <a href=""><img src="/static/images/logo15.png" alt=""/></a>
+                </div>
+            </div>
+                    </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title mt-50 mb-70">
+                    <h2 class="pinpai-title2 mb-15 pl-30 wow fadeInUp" data-wow-delay=".2s">我们的品牌</h2>
+                    <div class="pinpai-info pl-30 wow fadeInUp" data-wow-delay=".2s">我们相信，只有为赛车而生的产品才能提供必要的品质和感觉，Gusto将继续为中国汽车爱好者提供专业的建议和解决方案。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="yundong-box">
+    <div class="pl-240 pt-80">
+                <div class="col-12">
+            <div class="yundong2 wow fadeInLeft" data-wow-delay=".2s">
+                <div class="yundong2_a"></div>
+                <div class="yundong2_b">
+                    <div class="yundong2_b_bg"></div>
+                    <div class="yundong2_b_in">
+                        <img src="/static/images/img1.png" alt="研究与开发"/>
+                        <a href="/rd.html" class="yundong-more">了解更多</a>
+                    </div>
+                </div>
+                <div class="yundong2_c">
+                    <div class="yundong2_c_a"><span></span><a href="/rd.html">研究与开发</a></div>
+                </div>
+                <div class="yundong_b">
+                    <a href="/rd.html">精确细致的设计是所有机械加工制造的基础。所有设计的集成，一个性能卓越的底盘可以给用户带来实质性的性能优势…</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-12">
+            <div class="yundong2 wow fadeInLeft" data-wow-delay=".2s">
+                <div class="yundong2_a"></div>
+                <div class="yundong2_b">
+                    <div class="yundong2_b_bg"></div>
+                    <div class="yundong2_b_in">
+                        <img src="/uploads/20240710/58686786232b214f96c8b807c3e46b06.png" alt="赛车"/>
+                        <a href="/RaceCars.html" class="yundong-more">了解更多</a>
+                    </div>
+                </div>
+                <div class="yundong2_c">
+                    <div class="yundong2_c_a"><span></span><a href="/RaceCars.html">赛车</a></div>
+                </div>
+                <div class="yundong_b">
+                    <a href="/RaceCars.html">Gusto拥有一个全面的业务和物流系统，用于进口、销售和维护赛车、零部件和其他汽车运动服务和产品。该公司还是奥迪RS3 LMS、大众高尔夫GTI TCR、Seat LEON TCR、Cupra TCR在中国、韩国和泰国地区的唯一赛车和零部件经销商。</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-12">
+            <div class="yundong2 wow fadeInLeft" data-wow-delay=".2s">
+                <div class="yundong2_a"></div>
+                <div class="yundong2_b">
+                    <div class="yundong2_b_bg"></div>
+                    <div class="yundong2_b_in">
+                        <img src="/uploads/20240710/3df958fe5772e9164936538cc9b5a9cd.png" alt="汽车租赁"/>
+                        <a href="/servicesd/2.html" class="yundong-more">了解更多</a>
+                    </div>
+                </div>
+                <div class="yundong2_c">
+                    <div class="yundong2_c_a"><span></span><a href="/servicesd/2.html">汽车租赁</a></div>
+                </div>
+                <div class="yundong_b">
+                    <a href="/servicesd/2.html">Gusto拥有一个全面的业务和物流系统，用于进口、销售和维护赛车、零部件和其他汽车运动服务和产品。该公司还是奥迪RS3 LMS、大众高尔夫GTI TCR、Seat LEON TCR、Cupra TCR在中国、韩国和泰国地区的唯一赛车和零部件经销商。</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-12">
+            <div class="yundong2 wow fadeInLeft" data-wow-delay=".2s">
+                <div class="yundong2_a"></div>
+                <div class="yundong2_b">
+                    <div class="yundong2_b_bg"></div>
+                    <div class="yundong2_b_in">
+                        <img src="/uploads/20240710/b5091196fa21fb358e6cc2cc5c27afe0.png" alt="比赛支持"/>
+                        <a href="/servicesd/1.html" class="yundong-more">了解更多</a>
+                    </div>
+                </div>
+                <div class="yundong2_c">
+                    <div class="yundong2_c_a"><span></span><a href="/servicesd/1.html">比赛支持</a></div>
+                </div>
+                <div class="yundong_b">
+                    <a href="/servicesd/1.html">在根据客户要求提供高性能硬件后，Gusto的工程师团队还可以提供现场赛事支持，包括备件供应、现场维护、数据分析、故障诊断等。</a>
+                </div>
+            </div>
+        </div>
+            </div>
+</section>
+<section class="xinwen-box">
+    <div class="justify-content-center">
+        <div class="col-12">
+            <div class="section-title text-center">
+                <h3 class="xinwen-title mb-15 wow fadeInUp" data-wow-delay=".2s">新闻</h3>
+            </div>
+        </div>
+    </div>
+    <div class="pt-80">
+        <div class="xinwen wow fadeInUp" data-wow-delay=".2s">
+                        <img src="/static/images/img5.png" alt="壳牌团队Lynk&Co Racing在株洲挑战周末取得关键分数" class="xinwen-img"/>
+            <div class="xinwen_a">
+                <a href="/cn/newsd/shell_teamwork_lynk1.html" class="video-a"><img src="/static/images/icon9.png" /></a>
+                <div class="xinwen_a_a">
+                    <div class="container">
+                        <div class="xinwen_a_a_a">
+                            <a href="/cn/newsd/shell_teamwork_lynk1.html">壳牌团队Lynk&Co Racing在株洲挑战周末取得关键分数</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        <div class="xinwen_b">
+                <div class="container swiper-container swiper-container-xinwen">
+                    <div class="swiper-wrapper">
+                                                <div class="swiper-slide xinwen_item">
+                            <h3>0000-00-00 00:00:00</h3>
+                            <p>壳牌团队Lynk&Co Racing的车手Sunny WONG和张志强在株洲的比赛中获得了关键分，而卫冕冠军David ZHU在周末的比赛中以两个零分的成绩度过了一个噩梦般的周末。</p>
+                            <a href="/cn/newsd/shell_teamwork_lynk2.html">更多 &gt;&gt;</a>
+                        </div>
+                                                <div class="swiper-slide xinwen_item">
+                            <h3>0000-00-00 00:00:00</h3>
+                            <p>壳牌团队Lynk&Co Racing的车手Sunny WONG和张志强在株洲的比赛中获得了关键分，而卫冕冠军David ZHU在周末的比赛中以两个零分的成绩度过了一个噩梦般的周末。</p>
+                            <a href="/cn/newsd/shell_teamwork_lynk3.html">更多 &gt;&gt;</a>
+                        </div>
+                                                <div class="swiper-slide xinwen_item">
+                            <h3>0000-00-00 00:00:00</h3>
+                            <p>壳牌团队Lynk&Co Racing的车手Sunny WONG和张志强在株洲的比赛中获得了关键分，而卫冕冠军David ZHU在周末的比赛中以两个零分的成绩度过了一个噩梦般的周末。</p>
+                            <a href="/cn/newsd/shell_teamwork_lynk4.html">更多 &gt;&gt;</a>
+                        </div>
+                                            </div>
+                    <div class="swiper-pagination swiper-pagination-xinwen"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="guanggao-box" style="display: none;">
+    <div class="container">
+        <div class="guanggao wow fadeInUp" data-wow-delay=".2s">
+            <div class="col-6">
+                <h3>全球分销商</h3>
+                <p>我们的全球分销商网络确保无论您身在何处，我们的客户服务标准都能得到维护</p>
+                <a href="">寻找分销商</a>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="footer_a pl-400 pr-180 pt-40 pb-40">
+        <div class="row">
+            <div class="col-6">
+                <div class="foot_a_left_a wow fadeInLeft" data-wow-delay=".2s">
+                    <div class="item">
+                        <div class="item_a">产品中心</div>
+                        <div class="item_b">
+                            <a href="/cn/pinpai.html">品牌</a>
+                            <a href="/cn/products.html">产品</a>
+                            <a href="/cn/about.html#CompanyProfile">业务简介</a>
+                            <a href="/cn/about.html#OnlineStore">全国经销商</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item_a">赛车运动</div>
+                        <div class="item_b">
+                            <!-- <a href="#">保养和维护</a> -->
+                            <a href="/cn/RaceCars.html">赛车</a>
+                            <a href="/cn/services.html">研发</a>
+                            <a href="/cn/cases.html">其他情况</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item_a">公司</div>
+                        <div class="item_b">
+                            <a href="/cn/recruitment.html">招聘</a>
+                            <a href="/cn/news.html">新闻</a>
+                            <a href="/cn/about.html#CompanyProfile">公司简介</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="foot_a_left_b">
+                    <img src="/static/images/footlogo.png" alt="Gusto" />
+                </div>
+                <div class="foot_a_left_c">
+                    <div class="foot_a_left_c1">链接:</div>
+                    <div class="foot_a_left_c2">
+                                                <a href="https://teamworkms.com/"><img src="/static/images/flogo1.png" alt="" /></a>
+                                                <a href="https://www.alconbrakesonline.com/"><img src="/static/images/flogo3.png" alt="" /></a>
+                                            </div>
+                </div>
+            </div>
+            <div class="col-1">&nbsp;</div>
+            <div class="col-5">
+                <div class="foot_a_right_a wow fadeInRight" data-wow-delay=".2s">
+                    <div class="foot_a_right_a1">联系我们</div>
+                    <div class="foot_a_right_a2">
+                        <p>香港：香港九龙长沙湾永康街55号金柏中心11楼1102室</p><p>电话：+852 23318221/29760830</p><p>&amp;nbsp</p><p>深圳：广东省深圳市龙岗区布沙路57号丽晶商务园西区C座102-103</p><p>电话：+86（755）-86915859</p><p>电子邮件：matt@gusto.com.cn</p><p>&amp;nbsp</p><p>肇庆（赛区）：中国广东省肇庆市高新区龙湖大道11号楼</p><p>电话：+86（758）-3999132</p><p>电子邮件：customersupport@gusto.com.cn</p>                    </div>
+                    <div class="foot_a_right_a3">
+                                                <a href="https://weibo.com/u/1884127993" target="_blank"><img src="/static/images/m2.png" /></a>
+                                                <a href="https://www.douyin.com/user/MS4wLjABAAAArW8C-uF89AkuTUjp1H9ipWztbjDWvoF8mK1a3Rv3_oA" target="_blank"><img src="/static/images/m3.png" /></a>
+                                                <a href="https://space.bilibili.com/519797158" target="_blank"><img src="/static/images/m4.png" /></a>
+                                                <a href="https://www.facebook.com/gusto.motorsport" target="_blank"><img src="/static/images/m5.png" /></a>
+                                                <a href="https://www.instagram.com/gustoengineering/" target="_blank"><img src="/static/images/m6.png" /></a>
+                                                <a href="https://www.youtube.com/@gustoengineering4927" target="_blank"><img src="/static/images/m8.png" /></a>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_b">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 text-center">© Gusto Components Limited. All rights reserved</div>
+                <div class="col-4 text-center"></div>
+                <div class="col-4 text-center footer_b-a">
+                    <a href="/cn/PrivacyPolicy.html">隐私政策</a>
+                    <a href="/cn/CookiePolicy.html">Cookie政策</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_c text-center">
+        格时图赛车配件中心 版权所有 © 2005-2025 京ICP备13041838号-2  京ICP备13041838号-5    </div>
+</footer>
+<script src="/static/js/bootstrap-5.0.0-beta1.min.js"></script>
+<script src="/static/js/swiper.min.js"></script>
+<script src="/static/js/tiny-slider.js"></script>
+<script src="/static/js/wow.min.js"></script>
+<script src="/static/js/main.js"></script>
+</body>
+</html>
