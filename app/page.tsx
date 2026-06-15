@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronDownIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { brands, categories } from '@/lib/data/brands';
@@ -20,11 +20,21 @@ const heroSlides = [
   { bg: '/images/hero/hero-1.png', line: 'RACING DNA · SINCE 2005' },
 ];
 
+const featuredProducts = [
+  { name: 'ALCON ADVANTAGE EXTREME 前刹车套件', brand: 'ALCON', img: '/images/products/alcon-extreme.jpg', href: '/products/alcon/alcon-advantage-extreme', price: '¥28,000 - 38,000' },
+  { name: 'Öhlins Road & Track DFV 避震器', brand: 'Öhlins', img: '/images/products/ohlins-dfv.jpg', href: '/products/ohlins/ohlins-dfv', price: '¥22,000 - 28,000' },
+  { name: 'Millers CFS NT+ 竞技机油', brand: 'Millers Oils', img: '/images/products/millers-cfs.jpg', href: '/products/millers/millers-cfs-nt', price: '¥800 - 1,200' },
+  { name: 'GETuned 高性能排气系统', brand: 'GETuned', img: '/images/products/getuned-exhaust.jpg', href: '/products/getuned/getuned-exhaust', price: '¥8,000 - 15,000' },
+  { name: 'Stand21 FIA 认证赛车服', brand: 'Stand21', img: '/images/products/stand21-suit.jpg', href: '/products/stand21/stand21-suit', price: '¥8,000 - 25,000' },
+  { name: 'REVO Stage 1 ECU 程序', brand: 'REVO', img: '/images/products/revo-ecu.jpg', href: '/products/revo/revo-stage1', price: '¥5,000 - 8,000' },
+];
+
 export default function HomePage() {
   const [slide, setSlide] = useState(0);
   const nextSlide = useCallback(() => setSlide((s) => (s + 1) % heroSlides.length), []);
   useEffect(() => { const t = setInterval(nextSlide, 6000); return () => clearInterval(t); }, [nextSlide]);
 
+  // Parallax scroll
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
@@ -34,135 +44,64 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* ============ HERO: McLaren-style — image-first, minimal text, speed as UX ============ */}
+      {/* ============ HERO ============ */}
       <section className="relative h-screen min-h-[700px] overflow-hidden">
-        {/* Background image with zoom-out animation */}
         <AnimatePresence mode="wait">
-          <motion.div
-            key={slide}
-            initial={{ scale: 1.25, opacity: 0.3 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }}
+          <motion.div key={slide} initial={{ scale: 1.25, opacity: 0.3 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url('${heroSlides[slide].bg}')`, transform: `translateY(${scrollY * 0.3}px)` }}
+            style={{ backgroundImage: 'url(' + heroSlides[slide].bg + ')', transform: 'translateY(' + (scrollY * 0.3) + 'px)' }}
           />
         </AnimatePresence>
-
-        {/* Dark gradient — keeps bottom half dark for readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-[var(--color-background)] z-10" />
-
-        {/* Subtle center radial — draws eye to the center car */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(5,5,16,0.7)_100%)] z-10" />
 
-        {/* Speed lines — thin horizontal streaks that animate */}
+        {/* Speed lines */}
         <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden opacity-[0.06]">
           {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute h-px w-full"
-              style={{ top: `${15 + i * 18}%`, background: `linear-gradient(90deg, transparent 0%, rgba(0,229,255,0.8) 50%, transparent 100%)` }}
+            <motion.div key={i} className="absolute h-px w-full"
+              style={{ top: (15 + i * 18) + '%', background: 'linear-gradient(90deg, transparent 0%, rgba(0,229,255,0.8) 50%, transparent 100%)' }}
               animate={{ x: ['-100%', '200%'] }}
               transition={{ duration: 4 + i * 0.7, repeat: Infinity, ease: 'linear', delay: i * 1.2 }}
             />
           ))}
         </div>
 
-        {/* Bottom text area — minimal and refined */}
+        {/* Bottom text */}
         <div className="absolute bottom-0 left-0 right-0 z-20 pb-16 sm:pb-24">
           <div className="max-w-7xl mx-auto px-6 sm:px-10">
-            <motion.div
-              key={`content-${slide}`}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              {/* Superscript line — like McLaren's approach */}
+            <motion.div key={'content-' + slide} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}>
               <div className="flex items-center gap-4 mb-6">
-                <motion.span
-                  animate={{ width: ['40px', '80px', '40px'] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                  className="h-px bg-red-500/60 inline-block"
-                />
-                <span className="text-[10px] sm:text-xs tracking-[0.5em] text-red-400/80 uppercase font-bold">
-                  {heroSlides[slide].line}
-                </span>
+                <motion.span animate={{ width: ['40px', '80px', '40px'] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} className="h-px bg-red-500/60 inline-block" />
+                <span className="text-[10px] sm:text-xs tracking-[0.5em] text-red-400/80 uppercase font-bold">{heroSlides[slide].line}</span>
               </div>
-
-              {/* Main title — big impact, few words */}
-              <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black text-white tracking-tight mb-5 leading-none">
-                格时图<span className="text-gradient-fire">赛车配件</span>
-              </h1>
-
-              {/* Single line of supporting text */}
-              <p className="text-sm sm:text-base text-gray-400/80 max-w-md mb-8 font-light tracking-wide leading-relaxed">
-                代理ALCON、Öhlins、Millers Oils等全球顶级赛车品牌，为中国赛车运动提供专业配件与技术服务。
-              </p>
-
-              {/* Single primary CTA + secondary ghost */}
+              <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black text-white tracking-tight mb-5 leading-none">格时图<span className="text-gradient-fire">赛车配件</span></h1>
+              <p className="text-sm sm:text-base text-gray-400/80 max-w-md mb-8 font-light tracking-wide leading-relaxed">代理ALCON、Öhlins、Millers Oils等全球顶级赛车品牌，为中国赛车运动提供专业配件与技术服务。</p>
               <div className="flex items-center gap-5">
                 <Link href="/products" className="group relative px-8 py-3.5 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold rounded-lg text-sm tracking-[0.1em] overflow-hidden transition-all duration-500">
                   <span className="relative z-10 flex items-center gap-2">探索产品 <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /></span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </Link>
-                <Link href="/racing" className="text-sm text-gray-500 hover:text-gray-300 font-medium tracking-[0.1em] transition-colors duration-300">
-                  赛事动态 →
-                </Link>
+                <Link href="/racing" className="text-sm text-gray-500 hover:text-gray-300 font-medium tracking-[0.1em] transition-colors duration-300">赛事动态 →</Link>
               </div>
             </motion.div>
-
-            {/* Slide dots — minimal, bottom right */}
             <div className="absolute bottom-0 right-0 flex items-center gap-2.5">
               {heroSlides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setSlide(i)}
-                  className={`rounded-full transition-all duration-700 ${
-                    i === slide ? 'w-2 h-2 bg-red-500' : 'w-1.5 h-1.5 bg-white/15 hover:bg-white/30'
-                  }`}
-                />
+                <button key={i} onClick={() => setSlide(i)} className={'rounded-full transition-all duration-700 ' + (i === slide ? 'w-2 h-2 bg-red-500' : 'w-1.5 h-1.5 bg-white/15 hover:bg-white/30')} />
               ))}
             </div>
           </div>
         </div>
-
-        {/* Scroll indicator — subtle, bottom center */}
-        <motion.div
-          animate={{ y: [0, 8, 0], opacity: [0, 0.5, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
-          className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20"
-        >
+        <motion.div animate={{ y: [0, 8, 0], opacity: [0, 0.5, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20">
           <span className="text-[9px] tracking-[0.5em] text-gray-600 uppercase">Scroll</span>
         </motion.div>
       </section>
 
-      {/* ============ STATS BAR — quiet data strip ============ */}
-      <section className="py-12 px-4 border-b border-white/[0.03]">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-            {[
-              { value: '20+', label: '年行业经验' },
-              { value: '10+', label: '全球代理品牌' },
-              { value: '4', label: '运营中心' },
-              { value: '6', label: '旗下公司' },
-            ].map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="text-center"
-              >
-                <span className="text-2xl sm:text-3xl font-display font-black text-white">{s.value}</span>
-                <p className="mt-1.5 text-[11px] text-gray-500 tracking-[0.15em] uppercase">{s.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ============ STATS BAR with counting animation ============ */}
+      <StatsBar />
 
-      {/* ============ BRANDS — refined grid ============ */}
+      {/* ============ BRANDS ============ */}
       <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -173,13 +112,9 @@ export default function HomePage() {
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-px bg-white/[0.02] rounded-xl overflow-hidden">
             {brands.map((brand, i) => (
               <motion.div key={brand.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }}>
-                <Link href={`/products#${brand.id}`} className="group flex flex-col items-center justify-center p-6 sm:p-8 bg-[#0a0a18] hover:bg-[#0d0d22] transition-colors duration-500 h-full">
+                <Link href={'/products#' + brand.id} className="group flex flex-col items-center justify-center p-6 sm:p-8 bg-[#0a0a18] hover:bg-[#0d0d22] transition-colors duration-500 h-full">
                   <div className="w-14 h-14 sm:w-16 sm:h-16 mb-3 flex items-center justify-center invert opacity-50 group-hover:opacity-90 transition-all duration-500 group-hover:scale-105">
-                    {brandLogos[brand.id] ? (
-                      <img src={brandLogos[brand.id]} alt={brand.name} className="max-w-full max-h-full object-contain" />
-                    ) : (
-                      <span className="text-xl font-display font-black text-gray-500 group-hover:text-red-400">{brand.name.charAt(0)}</span>
-                    )}
+                    {brandLogos[brand.id] ? <img src={brandLogos[brand.id]} alt={brand.name} className="max-w-full max-h-full object-contain" /> : <span className="text-xl font-display font-black text-gray-500 group-hover:text-red-400">{brand.name.charAt(0)}</span>}
                   </div>
                   <span className="text-[11px] font-bold text-gray-500 group-hover:text-white text-center tracking-[0.12em] uppercase">{brand.name}</span>
                 </Link>
@@ -189,7 +124,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ PRODUCT CAROUSEL — horizontal scroll, image-driven ============ */}
+      {/* ============ PRODUCT CAROUSEL ============ */}
       <section className="py-24 px-4 bg-[#050508]">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-12">
@@ -197,29 +132,12 @@ export default function HomePage() {
               <span className="text-[10px] tracking-[0.5em] text-gray-500 uppercase font-bold">Featured Products</span>
               <h2 className="font-display text-3xl sm:text-5xl font-black text-white mt-3">推荐<span className="text-gradient-fire">产品</span></h2>
             </div>
-            <Link href="/products" className="hidden sm:flex items-center gap-2 text-sm text-gray-500 hover:text-white font-medium tracking-[0.1em] transition-colors">
-              查看全部 <ArrowRightIcon className="w-4 h-4" />
-            </Link>
+            <Link href="/products" className="hidden sm:flex items-center gap-2 text-sm text-gray-500 hover:text-white font-medium tracking-[0.1em] transition-colors">查看全部 <ArrowRightIcon className="w-4 h-4" /></Link>
           </div>
-
-          {/* Horizontal scroll container */}
-          <div className="flex gap-5 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: 'none' }}>
-            {[
-              { name: 'ALCON ADVANTAGE EXTREME 前刹车套件', brand: 'ALCON', img: '/images/products/alcon-extreme.jpg', href: '/products/alcon/alcon-advantage-extreme', price: '¥28,000 - 38,000' },
-              { name: 'Öhlins Road & Track DFV 避震器', brand: 'Öhlins', img: '/images/products/ohlins-dfv.jpg', href: '/products/ohlins/ohlins-dfv', price: '¥22,000 - 28,000' },
-              { name: 'Millers CFS NT+ 竞技机油', brand: 'Millers Oils', img: '/images/products/millers-cfs.jpg', href: '/products/millers/millers-cfs-nt', price: '¥800 - 1,200' },
-              { name: 'GETuned 高性能排气系统', brand: 'GETuned', img: '/images/products/getuned-exhaust.jpg', href: '/products/getuned/getuned-exhaust', price: '¥8,000 - 15,000' },
-              { name: 'Stand21 FIA 认证赛车服', brand: 'Stand21', img: '/images/products/stand21-suit.jpg', href: '/products/stand21/stand21-suit', price: '¥8,000 - 25,000' },
-              { name: 'REVO Stage 1 ECU 程序', brand: 'REVO', img: '/images/products/revo-ecu.jpg', href: '/products/revo/revo-stage1', price: '¥5,000 - 8,000' },
-            ].map((product, i) => (
-              <motion.div
-                key={product.name}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex-none w-[280px] sm:w-[340px] snap-start group cursor-pointer"
-              >
+          <div className="flex gap-5 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
+            {featuredProducts.map((product, i) => (
+              <motion.div key={product.name} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                className="flex-none w-[280px] sm:w-[340px] snap-start group cursor-pointer">
                 <Link href={product.href} className="block">
                   <div className="aspect-[4/3] rounded-xl overflow-hidden bg-gray-900 mb-4 relative">
                     <img src={product.img} alt={product.name} className="w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700" />
@@ -259,10 +177,7 @@ export default function HomePage() {
                       <span className="text-[9px] tracking-[0.2em] font-black uppercase px-2 py-0.5 rounded bg-black/50 text-red-400 border border-red-500/20">{item.sub}</span>
                     </div>
                   </div>
-                  <div className="p-5">
-                    <h3 className="text-base font-bold text-white">{item.title}</h3>
-                    <p className="mt-1.5 text-xs text-gray-500 leading-relaxed">{item.desc}</p>
-                  </div>
+                  <div className="p-5"><h3 className="text-base font-bold text-white">{item.title}</h3><p className="mt-1.5 text-xs text-gray-500 leading-relaxed">{item.desc}</p></div>
                 </Link>
               </motion.div>
             ))}
@@ -283,16 +198,14 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {news.slice(0, 3).map((item, i) => (
               <motion.div key={item.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                <Link href={`/news/${item.id}`} className="group block h-full bg-[var(--color-card)] rounded-xl border border-white/[0.04] overflow-hidden hover:border-red-500/20 transition-all duration-400">
+                <Link href={'/news/' + item.id} className="group block h-full bg-[var(--color-card)] rounded-xl border border-white/[0.04] overflow-hidden hover:border-red-500/20 transition-all duration-400">
                   <div className="aspect-[16/9] bg-gradient-to-br from-gray-900 to-gray-950 flex items-center justify-center text-4xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,17,0,0.05),transparent_60%)]" />
                     {item.category === 'racing' ? '🏁' : item.category === 'product' ? '📦' : '🏢'}
                   </div>
                   <div className="p-5">
                     <div className="flex items-center gap-2 mb-2">
-                      <Badge variant={item.category === 'racing' ? 'primary' : item.category === 'company' ? 'success' : 'neutral'}>
-                        {item.category === 'racing' ? '赛事' : item.category === 'product' ? '产品' : '公司'}
-                      </Badge>
+                      <Badge variant={item.category === 'racing' ? 'primary' : item.category === 'company' ? 'success' : 'neutral'}>{item.category === 'racing' ? '赛事' : item.category === 'product' ? '产品' : '公司'}</Badge>
                       <span className="text-[10px] text-gray-600 tracking-wider">{item.date}</span>
                     </div>
                     <h3 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors line-clamp-2 leading-snug">{item.title}</h3>
@@ -321,5 +234,60 @@ export default function HomePage() {
         </div>
       </section>
     </div>
+  );
+}
+
+// ─── sub-components ───
+
+function StatsBar() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+
+  const stats = [
+    { target: 20, suffix: '+', label: '年行业经验', sub: 'YRS EXPERIENCE' },
+    { target: 10, suffix: '+', label: '全球代理品牌', sub: 'GLOBAL BRANDS' },
+    { target: 4, suffix: '', label: '运营中心', sub: 'LOCATIONS' },
+    { target: 6, suffix: '', label: '旗下公司', sub: 'ENTITIES' },
+  ];
+
+  return (
+    <section ref={ref} className="py-16 px-4 border-b border-white/[0.03] overflow-hidden">
+      <motion.div style={{ opacity }} className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className="text-center">
+              <CountUp target={stat.target} suffix={stat.suffix} isActive={isInView} delay={i * 0.15} />
+              <p className="mt-1.5 text-[11px] text-gray-500 tracking-[0.15em] uppercase">{stat.label}</p>
+              <p className="text-[9px] text-gray-600 tracking-[0.3em] uppercase mt-0.5">{stat.sub}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+function CountUp({ target, suffix, isActive, delay }: { target: number; suffix: string; isActive: boolean; delay: number }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isActive) return;
+    const start = Date.now();
+    const duration = 1500 + delay * 1000;
+    const timer = setInterval(() => {
+      const elapsed = Date.now() - start;
+      if (elapsed >= duration) { setCount(target); clearInterval(timer); }
+      else {
+        const progress = 1 - Math.pow(1 - elapsed / duration, 3); setCount(Math.round(progress * target)); }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [isActive, target, delay]);
+
+  return (
+    <motion.span initial={{ opacity: 0, scale: 0.5 }} animate={isActive ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay }}
+      className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight"
+    >{count}{suffix}</motion.span>
   );
 }
