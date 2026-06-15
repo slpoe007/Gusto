@@ -26,7 +26,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
             <div className="relative">
-              <img src="/images/footlogo.png" alt="Gusto" className="h-7 sm:h-8 invert opacity-90 group-hover:opacity-100 transition-opacity" />
+              <img src="/images/logo.png" alt="Gusto" className="h-7 sm:h-8 invert opacity-90 group-hover:opacity-100 transition-opacity" />
               <div className="absolute -bottom-0.5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </div>
             <span className="hidden sm:inline text-lg font-bold font-display text-white tracking-[0.15em]">GUSTO<span className="text-red-500">TECHNIK</span></span>

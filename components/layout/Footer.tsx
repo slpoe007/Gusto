@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <img src="/images/footlogo.png" alt="Gusto" className="h-6 invert opacity-80 mb-4" />
+            <img src="/images/logo.png" alt="Gusto" className="h-6 invert opacity-80 mb-4" />
             <p className="text-sm text-gray-400 leading-relaxed">中国领先的赛车配件供应商。代理 ALCON、Öhlins、Millers Oils、Stand21 等世界顶级品牌。</p>
           </div>
           <div>
