@@ -190,6 +190,7 @@ function BrandsSection({ isMobile }: { isMobile: boolean }) {
                   {brandLogos[brand.id] ? <img src={brandLogos[brand.id]} alt={brand.name} className="max-w-full max-h-full object-contain" /> : <span className="text-xl font-display font-black text-gray-500 group-hover:text-red-400">{brand.name.charAt(0)}</span>}
                 </div>
                 <span className="brand-name text-[11px] font-bold text-gray-500 group-hover:text-white text-center tracking-[0.12em] uppercase">{brand.name}</span>
+                <p className="mt-1 text-[9px] text-gray-600 text-center leading-tight line-clamp-2">{brand.description.split('。')[0]}。</p>
               </Link>
             </div>
           ))}
@@ -202,6 +203,7 @@ function BrandsSection({ isMobile }: { isMobile: boolean }) {
                   {brandLogos[brand.id] ? <img src={brandLogos[brand.id]} alt={brand.name} className="max-w-full max-h-full object-contain" /> : <span className="text-xl font-display font-black text-gray-500 group-hover:text-red-400">{brand.name.charAt(0)}</span>}
                 </div>
                 <span className="brand-name text-[11px] font-bold text-gray-500 group-hover:text-white text-center tracking-[0.12em] uppercase">{brand.name}</span>
+                <p className="mt-1 text-[9px] text-gray-600 text-center leading-tight line-clamp-2">{brand.description.split('。')[0]}。</p>
               </Link>
             </div>
           ))}
@@ -277,11 +279,20 @@ function BusinessSection({ isMobile }: { isMobile: boolean }) {
 
   return (
     <section ref={ref} className="py-24 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-[10px] tracking-[0.5em] text-red-400 uppercase font-bold">Racing & Services</span>
-          <h2 className="font-display text-3xl sm:text-5xl font-black text-white mt-3 mb-3">赛事<span className="text-gradient-fire">与</span>服务</h2>
+      {/* 赛事视频背景 */}
+      <div className="relative mb-16 rounded-2xl overflow-hidden aspect-[21/9] max-w-7xl mx-auto">
+        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
+          <source src="/video/racing.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-black/70" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="font-display text-3xl sm:text-5xl font-black text-white">赛事<span className="text-gradient-fire">与</span>服务</h2>
+            <p className="mt-3 text-sm text-gray-300 tracking-wide">捷凯车队 6 年 13 冠 · TCR 中国系列赛</p>
+          </div>
         </div>
+      </div>
+      <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {businessItems.map((item) => (
             <div key={item.title} className="business-card h-full">
