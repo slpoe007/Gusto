@@ -1,114 +1,98 @@
 export interface NewsItem {
   id: string;
   title: string;
+  titleEN: string;
   date: string;
   category: 'racing' | 'product' | 'company';
-  excerpt: string;
-  content: string;
-  image: string;
-  featured: boolean;
+  summary: string;
+  summaryEN: string;
+  image?: string;
+  content?: string;
 }
 
 export const news: NewsItem[] = [
   {
-    id: 'zhuzhou-2025-r6',
-    title: 'Shell Teamwork Lynk & Co Racing 株洲站艰难周末拿下关键积分',
-    date: '2025-10-20',
+    id: '2025-tcr-triple-crown',
+    title: '捷凯车队2025赛季三冠王大满贯！车队+车型+车手冠军',
+    titleEN: 'Teamwork Motorsport 2025 Triple Crown — Team, Model & Driver Championships',
+    date: '2025-11',
     category: 'racing',
-    excerpt: 'Shell Teamwork Lynk & Co Racing 在 TCR China 株洲站经历了一个充满挑战的周末。车手 Sunny WONG 和张志强在艰难条件下为车队拿下关键积分，卫冕冠军朱戴维则遭遇了零分的噩梦周末。',
-    content: `# Shell Teamwork Lynk & Co Racing 株洲站艰难周末拿下关键积分
-
-株洲国际赛车场再次成为 TCR China 赛季的转折点。Shell Teamwork Lynk & Co Racing 车队在这个充满挑战的周末展现了坚韧的竞技精神。
-
-## Sunny WONG — 稳定输出
-
-12 号车手黄日燊在两回合比赛中展现了出色的稳定性和比赛策略。尽管赛道条件复杂，他始终保持冷静，为车队贡献了宝贵的积分。
-
-## 张志强 — 逆境中的亮点
-
-面对激烈的竞争，张志强在第二回合中完成了几次精彩的超车，展示了 Lynk & Co 03 TCR 赛车的强大竞争力。
-
-## 朱戴维 — 冠军的考验
-
-对于卫冕冠军朱戴维来说，这是一个需要尽快忘记的周末。两回合零分的结果让他和车队的积分榜领先优势受到了威胁。但冠军从不因一次失利而动摇——期待下一站的强势反弹。
-
-## 车队积分
-
-尽管遭遇困难，Shell Teamwork Lynk & Co Racing 在车队积分榜上仍然保持着竞争力。赛季还剩最后两站，一切都还有可能。`,
-    image: '/images/news/zhuzhou-2025.jpg',
-    featured: true,
+    summary: '捷凯车队在2025 TCR China/CTCC 赛季完成历史性大满贯：包揽车队杯、车型杯及车手杯三项总冠军。朱戴维以451分夺得车手总冠军，车队全年斩获25个分站冠军、100次领奖台完赛。',
+    summaryEN: 'Teamwork Motorsport achieved a historic triple crown in the 2025 TCR China/CTCC season, sweeping Team, Model, and Driver championships. Carlos Zhu claimed the drivers\' title with 451 points.',
+    image: '/images/racing/2025-champions.jpg'
   },
   {
-    id: 'stand21-authorization',
-    title: '格时图正式成为 Stand21 中国区授权经销商',
-    date: '2025-09-15',
-    category: 'company',
-    excerpt: '格时图集团宣布与法国顶级赛车安全装备品牌 Stand21 达成战略合作，正式成为其中国区授权经销商，为中国赛车手提供 FIA 认证的专业赛车安全装备。',
-    content: `# 格时图正式成为 Stand21 中国区授权经销商
-
-格时图集团荣幸宣布，我们已与法国顶级赛车安全装备品牌 Stand21 达成战略合作，正式成为其中国区授权经销商。
-
-## 关于 Stand21
-
-Stand21 是 F1、WEC、MotoGP 等世界顶级赛事的官方供应商，以其创新的安全技术和卓越的舒适性闻名于世。品牌产品涵盖：
-- FIA 8856-2018 认证赛车服
-- 赛车手套
-- 赛车鞋
-- 防火内衣
-- HANS 系统
-
-## 为中国赛车手服务
-
-通过这次合作，格时图将为中国赛车手提供：
-- Stand21 全系产品订购服务
-- 个性化定制方案
-- 专业技术咨询和售后支持
-
-欢迎各车队和车手联系我们了解更多产品信息。`,
-    image: '/images/news/stand21-deal.jpg',
-    featured: false,
+    id: 'cupra-kiro-first-win',
+    title: '历史性突破！CUPRA KIRO 斩获 Formula E 首胜',
+    titleEN: 'Historic Breakthrough: CUPRA KIRO Scores First Formula E Victory',
+    date: '2025',
+    category: 'racing',
+    summary: 'CUPRA KIRO 车队在 Formula E 纽博格林站夺得队史首胜及首个杆位。车队领队许家泰（Alex Hui）成为首位登上 Formula E 领奖台最高处的中国人。',
+    summaryEN: 'CUPRA KIRO secured its first Formula E victory and pole position at the Nürburgring. Team Principal Alex Hui became the first Chinese to stand on the top step of a Formula E podium.',
+    image: '/images/racing/cupra-kiro-win.jpg'
   },
   {
-    id: 'getuned-launch',
-    title: 'GETuned 自主品牌正式发布 — 从赛道到街道',
-    date: '2025-06-01',
+    id: 'dongfeng-etcr',
+    title: '东风 eπ ETCR 纯电赛车发布：全球首款中国自主研发电动赛车',
+    titleEN: 'Dongfeng eπ ETCR Unveiled: World\'s First Chinese-Developed Electric Race Car',
+    date: '2024',
     category: 'product',
-    excerpt: '格时图自主研发品牌 GETuned 正式亮相，首款产品为高性能排气系统。GETuned 将赛道技术反哺民用市场，为性能爱好者提供专业级升级方案。',
-    content: `# GETuned 自主品牌正式发布
-
-格时图集团经过多年技术积累，正式推出自主研发品牌 — GETuned。
-
-## 品牌理念
-
-GETuned = Gusto Engineering + Tuned。我们将赛车领域的前沿技术转化为可量产的民用产品，让每一位性能爱好者都能享受到来自赛道的技术红利。
-
-## 首款产品：高性能排气系统
-
-GETuned 首款产品为高性能排气系统：
-- T304 不锈钢材质
-- 优化的管径和消音设计
-- 碳纤维尾嘴
-- 独特声浪调校
-
-首批适配车型：VW Golf GTI TCR、Audi RS3 LMS
-
-## 更多产品即将到来
-
-GETuned 的研发管线包括：悬挂升级套件、进气系统、ECU 调校方案等，敬请期待。`,
-    image: '/images/news/getuned-launch.jpg',
-    featured: true,
+    summary: '格时图受委托开发东风 eπ ETCR 纯电赛车，全面负责底盘、空气动力学、电子系统及电驱总成的工程设计。800V高压平台、350kW单电机，株洲赛道刷出1:42.586最快圈速。',
+    summaryEN: 'Gusto developed the Dongfeng eπ ETCR — an 800V pure-electric race car with 350kW motor. Set a record lap of 1:42.586 at Zhuzhou Circuit.',
+    image: '/images/racing/dongfeng-etcr.jpg'
+  },
+  {
+    id: 'macau-gp-2024',
+    title: '捷凯车队澳门格兰披治 TCR 挑战赛双冠',
+    titleEN: 'Teamwork Motorsport Macau GP TCR Challenge Double Victory',
+    date: '2024',
+    category: 'racing',
+    summary: '捷凯车队在2024澳门格兰披治大赛车 TCR 挑战赛中斩获车手及车队双冠。自2013年首秀以来，捷凯已在澳门东望洋赛道多次站上最高领奖台。',
+    summaryEN: 'Teamwork Motorsport claimed driver and team double victory at the 2024 Macau Grand Prix TCR Challenge.',
+  },
+  {
+    id: '100th-podium',
+    title: '里程碑！捷凯车队达成第100次领奖台',
+    titleEN: 'Milestone: Teamwork Motorsport Reaches 100th Podium',
+    date: '2025',
+    category: 'racing',
+    summary: '自2020年与领克合作以来，捷凯车队累计达成100次领奖台完赛，标志着车队在TCR赛事中的统治地位。',
+    summaryEN: 'Since partnering with Lynk & Co in 2020, Teamwork Motorsport has achieved 100 podium finishes.',
+  },
+  {
+    id: 'ctcc-engine-supplier',
+    title: '格时图 CTCC 官方引擎供应商：4赛季69座奖杯',
+    titleEN: 'Gusto as CTCC Official Engine Supplier: 69 Trophies in 4 Seasons',
+    date: '2016-2020',
+    category: 'company',
+    summary: '2016-2020年，格时图作为CTCC官方引擎供应商，为北汽、广汽丰田、海马等顶级车队提供EA888 Gen2动力单元，4个赛季累计获得69座奖杯。',
+    summaryEN: 'As CTCC official engine supplier (2016-2020), Gusto provided EA888 Gen2 power units to top teams, amassing 69 trophies.',
+  },
+  {
+    id: 'tcr-58-cars',
+    title: '格时图 TCR 赛车分销突破58台',
+    titleEN: 'Gusto TCR Race Car Distribution Surpasses 58 Units',
+    date: '2016-至今',
+    category: 'company',
+    summary: '自2016年起成为大众集团TCR亚洲独家分销商，累计售出58台TCR赛车，服务亚太地区专业车队。Audi RS 3 LMS两代合计30台领跑销量。',
+    summaryEN: 'Official Volkswagen Group TCR Asian distributor since 2016. 58 units sold, with Audi RS 3 LMS leading at 30 units.',
+  },
+  {
+    id: 'aron-kwok-2023',
+    title: '郭富城加盟捷凯车队，担任特邀嘉宾车手',
+    titleEN: 'Aaron Kwok Joins Teamwork Motorsport as Special Guest Driver',
+    date: '2023',
+    category: 'racing',
+    summary: '金像奖影帝、华语乐坛天王郭富城以"特邀嘉宾车手"身份加入捷凯车队，将赛车运动带入主流大众视野，极大提升了TCR赛事的跨界影响力。',
+    summaryEN: 'Movie icon Aaron Kwok joined Teamwork Motorsport as Special Guest Driver, bringing motorsport to mainstream audiences.',
+  },
+  {
+    id: 'geely-super-cup',
+    title: '格时图开发吉利缤瑞Cool 超级杯PRO赛车',
+    titleEN: 'Gusto Develops Geely Binray Cool for Super Cup PRO',
+    date: '2023',
+    category: 'product',
+    summary: '格时图为吉利超级杯PRO赛事开发并制造吉利缤瑞Cool赛车，展现自主赛车制造能力。',
+    summaryEN: 'Gusto developed and manufactured the Geely Binray Cool race car for the Super Cup PRO series.',
   },
 ];
-
-export function getNewsByCategory(category: string): NewsItem[] {
-  if (category === 'all') return news;
-  return news.filter(n => n.category === category);
-}
-
-export function getLatestNews(count: number = 3): NewsItem[] {
-  return news.slice(0, count);
-}
-
-export function getNewsById(id: string): NewsItem | undefined {
-  return news.find(n => n.id === id);
-}

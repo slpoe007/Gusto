@@ -9,9 +9,9 @@ import ProductCard from '@/components/products/ProductCard';
 import InquiryForm from '@/components/products/InquiryForm';
 
 const brandLogos: Record<string, string> = {
-  alcon: '/images/brand-alcon.png', ohlins: '/images/brand-ohlins.png', millers: '/images/brand-millers.png',
-  revo: '/images/brand-revo.png', stand21: '/images/brand-stand21.png', getuned: '/images/brand-getuned.png',
-  racetech: '/images/brand-racetech.png', '3mo': '/images/brand-3mo.png', idi: '/images/brand-idi.png',
+  alcon: '/images/brands/alcon.png', ohlins: '/images/brands/ohlins.png', millers: '/images/brands/millers.png',
+  revo: '/images/brands/revo.png', stand21: '/images/brands/stand21.png', getuned: '/images/brands/getuned.png',
+  racetech: '/images/brands/racetech.png', '3mo': '/images/brands/3mo.png', idi: '/images/brands/idi.png',
 };
 
 const raceCars = [

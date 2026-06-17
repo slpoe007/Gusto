@@ -20,7 +20,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <img src="/images/logo.png" alt="Gusto" className="h-6 invert opacity-70 mb-4" />
+            <img src="/images/logo.png" alt="Gusto" className="h-6 opacity-70 mb-4" />
             <p className="text-sm text-gray-500 leading-relaxed mb-4">中国领先的赛车配件供应商。代理ALCON、Ohlins、Millers Oils、Stand21等世界顶级品牌。</p>
             <div className="flex flex-wrap gap-2">{socials.map((s) => (<a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="text-[10px] text-gray-600 hover:text-gray-400 transition-colors px-2 py-1 rounded border border-white/[0.04] hover:border-white/[0.08]">{s.name}</a>))}</div>
           </div>

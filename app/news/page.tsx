@@ -59,7 +59,7 @@ export default function NewsPage() {
                       <span className="text-xs text-gray-500">{item.date}</span>
                     </div>
                     <h3 className="text-base font-semibold text-white group-hover:text-[var(--color-primary)] transition-colors line-clamp-2 leading-snug mb-2">{item.title}</h3>
-                    <p className="text-sm text-gray-400 line-clamp-3 leading-relaxed">{item.excerpt}</p>
+                    <p className="text-sm text-gray-400 line-clamp-3 leading-relaxed">{item.summary}</p>
                   </div>
                 </Link>
               </motion.div>

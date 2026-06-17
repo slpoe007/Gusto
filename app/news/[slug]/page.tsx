@@ -24,13 +24,13 @@ export default function NewsDetailPage({ params }: { params: Promise<{ slug: str
           <span className="text-xs text-gray-500">{article.date}</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">{article.title}</h1>
-        <p className="text-lg text-gray-400 mb-8 leading-relaxed">{article.excerpt}</p>
+        <p className="text-lg text-gray-400 mb-8 leading-relaxed">{article.summary}</p>
         <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl flex items-center justify-center relative overflow-hidden mb-10">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(204,0,0,0.08),transparent_70%)]" />
           <span className="text-7xl">🏁</span>
         </div>
         <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed whitespace-pre-line text-sm">
-          {article.content.split('\n').map((line, i) => {
+          {article.content?.split('\n').map((line, i) => {
             const trimmed = line.trim();
             if (trimmed.startsWith('# ') && !trimmed.startsWith('## ')) return <h1 key={i} className="text-2xl font-bold text-white mt-8 mb-4">{trimmed.slice(2)}</h1>;
             if (trimmed.startsWith('## ')) return <h2 key={i} className="text-xl font-bold text-white mt-6 mb-3">{trimmed.slice(3)}</h2>;

@@ -9,9 +9,9 @@ import { news } from '@/lib/data/news';
 import Badge from '@/components/ui/Badge';
 
 const brandLogos: Record<string, string> = {
-  alcon: '/images/brands/logo1.png', ohlins: '/images/brands/logo2.png', millers: '/images/brands/logo3.png',
-  revo: '/images/brands/logo4.png', stand21: '/images/brands/logo5.png', getuned: '/images/brands/logo7.png',
-  racetech: '/images/brands/logo8.png', '3mo': '/images/brands/logo9.png', idi: '/images/brands/logo10.png',
+  alcon: '/images/brands/alcon.png', ohlins: '/images/brands/ohlins.png', millers: '/images/brands/millers.png',
+  revo: '/images/brands/revo.png', stand21: '/images/brands/stand21.png', getuned: '/images/brands/getuned.png',
+  racetech: '/images/brands/racetech.png', '3mo': '/images/brands/3mo.png', idi: '/images/brands/idi.png',
 };
 
 const heroSlides = [
@@ -77,7 +77,7 @@ export default function HomePage() {
                 <span className="text-[10px] sm:text-xs tracking-[0.5em] text-red-400/80 uppercase font-bold">{heroSlides[slide].line}</span>
               </div>
               <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black text-white tracking-tight mb-5 leading-none">格时图<span className="text-gradient-fire">赛车配件</span></h1>
-              <p className="text-sm sm:text-base text-gray-400/80 max-w-md mb-8 font-light tracking-wide leading-relaxed">代理ALCON、Öhlins、Millers Oils等全球顶级赛车品牌，为中国赛车运动提供专业配件与技术服务。</p>
+              <p className="text-sm sm:text-base text-gray-400/80 max-w-md mb-8 font-light tracking-wide leading-relaxed">国内首批引进世界级赛车配件，TCR赛车亚洲官方经销商。代理ALCON、Öhlins、Millers Oils等全球顶级品牌，提供从赛道到公路的全方位性能解决方案。</p>
               <div className="flex items-center gap-5">
                 <Link href="/products" className="group relative px-8 py-3.5 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold rounded-lg text-sm tracking-[0.1em] overflow-hidden transition-all duration-500">
                   <span className="relative z-10 flex items-center gap-2">探索产品 <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /></span>
@@ -246,16 +246,18 @@ function StatsBar() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   const stats = [
-    { target: 20, suffix: '+', label: '年行业经验', sub: 'YRS EXPERIENCE' },
-    { target: 10, suffix: '+', label: '全球代理品牌', sub: 'GLOBAL BRANDS' },
+    { target: 2005, suffix: '', label: '创立年份', sub: 'EST. 2005' },
+    { target: 58, suffix: '', label: 'TCR赛车销售', sub: 'TCR CARS SOLD' },
+    { target: 13, suffix: '', label: '6年夺冠纪录', sub: 'TITLES IN 6 YRS' },
+    { target: 105, suffix: '', label: 'CTCC奖杯', sub: 'CTCC TROPHIES' },
     { target: 4, suffix: '', label: '运营中心', sub: 'LOCATIONS' },
-    { target: 6, suffix: '', label: '旗下公司', sub: 'ENTITIES' },
+    { target: 100, suffix: '+', label: '团队成员', sub: 'TEAM MEMBERS' },
   ];
 
   return (
     <section ref={ref} className="py-16 px-4 border-b border-white/[0.03] overflow-hidden">
       <motion.div style={{ opacity }} className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 sm:gap-8">
           {stats.map((stat, i) => (
             <div key={stat.label} className="text-center">
               <CountUp target={stat.target} suffix={stat.suffix} isActive={isInView} delay={i * 0.15} />
@@ -289,5 +291,5 @@ function CountUp({ target, suffix, isActive, delay }: { target: number; suffix: 
     <motion.span initial={{ opacity: 0, scale: 0.5 }} animate={isActive ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay }}
       className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight"
     >{count}{suffix}</motion.span>
-  );
+  )
 }

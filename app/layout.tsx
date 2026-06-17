@@ -9,7 +9,8 @@ const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-display" });
 
 export const metadata: Metadata = {
   title: "格时图 GustoTechnik | 赛车配件与赛事服务",
-  description: "格时图集团——中国领先的赛车配件供应商。代理 ALCON、Öhlins、Millers Oils、Stand21 等世界顶级品牌，提供专业赛车技术服务。",
+  description:
+    "格时图集团（Gusto Group）——中国领先的赛车配件供应商与TCR赛车亚洲官方经销商。代理ALCON、Öhlins、Millers Oils等全球顶级品牌，旗下捷凯车队6年13冠。香港·北京·深圳·肇庆。",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
