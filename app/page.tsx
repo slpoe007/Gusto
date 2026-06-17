@@ -69,10 +69,14 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative h-screen min-h-[700px] overflow-hidden">
-        {heroSlides.map((s, i) => (
-          <div key={i} className={'absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ' + (i === slide ? 'opacity-100' : 'opacity-0')}
-            style={{ backgroundImage: 'url(\'' + s.bg + '\')', transform: 'translateY(' + (scrollY * 0.3) + 'px)' }} />
-        ))}
+        {/* 视频背景 */}
+        <video
+          autoPlay muted loop playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/images/hero/hero-1.png"
+        >
+          <source src="/video/hero.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-[var(--color-background)] z-10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(5,5,16,0.7)_100%)] z-10" />
         <div className="absolute bottom-0 left-0 right-0 z-20 pb-16 sm:pb-24">
