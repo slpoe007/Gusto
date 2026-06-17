@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
 const navItems = [
@@ -50,6 +50,13 @@ export default function Navbar() {
   const [openMobile, setOpenMobile] = useState<string | null>(null);
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollY } = useScroll();
+  const headerBg = useTransform(scrollY, [0, 100], ['rgba(5,5,16,0)', 'rgba(5,5,16,0.95)']);
+  const headerBorder = useTransform(scrollY, [0, 100], ['rgba(255,255,255,0)', 'rgba(255,255,255,0.04)']);
+  const headerHeight = useTransform(scrollY, [0, 100], ['4rem', '3.5rem']);
+  const logoScale = useTransform(scrollY, [0, 100], [1, 0.85]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -62,16 +69,23 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#050510]/95 backdrop-blur-xl border-b border-white/[0.04]">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-3 shrink-0 group">
-            <div className="relative">
-              <img src="/images/logo.png" alt="Gusto" className="h-7 sm:h-8 opacity-90 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute -bottom-0.5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-            </div>
-            <span className="hidden sm:inline text-lg font-bold font-display text-white tracking-[0.15em]">GUSTO<span className="text-red-500">TECHNIK</span></span>
-          </Link>
+    <motion.header
+      ref={headerRef}
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl"
+      style={{ background: headerBg, borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: headerBorder, height: headerHeight }}
+      transition={{ type: 'tween', duration: 0.2 }}
+    >
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="flex items-center justify-between h-full">
+          <motion.div style={{ scale: logoScale }}>
+            <Link href="/" className="flex items-center gap-3 shrink-0 group">
+              <div className="relative">
+                <img src="/images/logo.png" alt="Gusto" className="h-6 sm:h-7 opacity-90 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute -bottom-0.5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+              </div>
+              <span className="hidden sm:inline text-base font-bold font-display text-white tracking-[0.15em]">GUSTO<span className="text-red-500">TECHNIK</span></span>
+            </Link>
+          </motion.div>
 
           <div className="hidden lg:flex items-center gap-0.5" ref={dropdownRef}>
             {navItems.map((item) => {
@@ -90,8 +104,7 @@ export default function Navbar() {
                     {item.children && <ChevronDownIcon className={`w-3 h-3 transition-transform duration-200 ${openDesktop === item.href ? 'rotate-180' : ''}`} />}
                   </Link>
 
-                  {item.children &&
- openDesktop === item.href && (
+                  {item.children && openDesktop === item.href && (
                     <motion.div
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -125,35 +138,29 @@ export default function Navbar() {
 
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}
-              className="lg:hidden border-t border-white/[0.04] overflow-hidden">
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}
+              className="lg:hidden border-t border-white/[0.04] overflow-hidden bg-[#050510]/95 backdrop-blur-xl">
               <div className="py-3 space-y-0.5 max-h-[70vh] overflow-y-auto">
                 {navItems.map((item) => {
-                  const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                  const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
                   return (
                     <div key={item.href}>
                       <button
                         onClick={() => {
-                          if (item.children) {
-                            setOpenMobile(openMobile === item.href ? null : item.href);
-                          } else {
-                            setMobileOpen(false);
-                            window.location.href = item.href;
-                          }
+                          if (item.children) { setOpenMobile(openMobile === item.href ? null : item.href); }
+                          else { setMobileOpen(false); window.location.href = item.href; }
                         }}
-                        className={"w-full text-left px-4 py-3 text-sm tracking-[0.1em] transition-colors rounded-lg flex items-center justify-between " + (isActive ? "text-white bg-white/[0.03]" : "text-gray-400 hover:text-gray-200")}
+                        className={'w-full text-left px-4 py-3 text-sm tracking-[0.1em] transition-colors rounded-lg flex items-center justify-between ' + (isActive ? 'text-white bg-white/[0.03]' : 'text-gray-400 hover:text-gray-200')}
                       >
                         {item.label}
-                        {item.children && <ChevronDownIcon className={"w-4 h-4 transition-transform duration-200 " + (openMobile === item.href ? "rotate-180" : "")} />}
+                        {item.children && <ChevronDownIcon className={'w-4 h-4 transition-transform duration-200 ' + (openMobile === item.href ? 'rotate-180' : '')} />}
                       </button>
                       {item.children && openMobile === item.href && (
                         <div className="ml-4 border-l border-white/[0.04] pl-4 py-1 space-y-0.5">
                           {item.children.map((child) => (
                             <Link key={child.href} href={child.href} onClick={() => setMobileOpen(false)}
                               className="block px-3 py-2 text-sm text-gray-500 hover:text-gray-200 transition-colors rounded-lg"
-                            >
-                              {child.label}
-                            </Link>
+                            >{child.label}</Link>
                           ))}
                         </div>
                       )}
@@ -165,6 +172,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </nav>
-    </header>
+    </motion.header>
   );
 }
