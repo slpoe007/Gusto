@@ -56,10 +56,10 @@ const navItems = [
   {
     label: '服务中心', href: '/services',
     children: [
-      { label: '赛事工程支持', href: '/services' },
-      { label: '赛车租赁', href: '/services' },
-      { label: '车手培训', href: '/services' },
-      { label: '门店安装', href: '/services' },
+      { label: '赛事工程支持', href: '/services#engineering' },
+      { label: '赛车租赁', href: '/services#rental' },
+      { label: '车手培训', href: '/services#training' },
+      { label: '门店安装', href: '/services#installation' },
     ],
   },
   { label: '技术支持', href: '/technical' },
@@ -197,87 +197,78 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mega Menu Overlay */}
+        {/* Mega Menu Overlay — full viewport, 50/50 split */}
         <AnimatePresence>
           {megaOpen && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="absolute top-full left-0 right-0 bg-[#06060f]/98 backdrop-blur-2xl border-t border-white/[0.04] shadow-2xl shadow-black/90 overflow-hidden"
-              style={{ minHeight: '380px' }}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: '100vh' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-[3.5rem] left-0 right-0 bg-[#050510]/98 backdrop-blur-2xl border-t border-white/[0.04] z-40 overflow-hidden"
             >
-              <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10 flex gap-12">
-                {/* Left: Menu Columns — stagger in from left */}
-                <div className="flex gap-16 flex-1">
-                  {megamenuData.leftCols.map((col, colIdx) => (
-                    <motion.div
-                      key={col.title}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + colIdx * 0.08, duration: 0.4, ease: 'easeOut' }}
-                      className="min-w-[160px]"
-                    >
-                      <h3 className="text-[10px] tracking-[0.2em] text-gray-500 uppercase font-bold mb-4">{col.title}</h3>
-                      <div className="space-y-1">
-                        {col.items.map((sub) => (
-                          <Link
-                            key={sub.label}
-                            href={sub.href}
-                            onClick={() => setMegaOpen(false)}
-                            onMouseEnter={() => setHoveredMegaItem(sub.label)}
-                            onMouseLeave={() => setHoveredMegaItem(null)}
-                            className="group flex items-center justify-between px-3 py-2.5 -mx-3 rounded-lg hover:bg-white/[0.03] transition-colors"
-                          >
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <PlusIcon className="w-3 h-3 text-gray-600 group-hover:text-red-500 transition-colors" />
-                                <span className="text-sm text-gray-300 group-hover:text-white transition-colors font-medium">{sub.label}</span>
-                              </div>
-                              {sub.desc && <p className="text-[10px] text-gray-600 mt-0.5 ml-5">{sub.desc}</p>}
-                            </div>
-                            <ChevronRightIcon className="w-3.5 h-3.5 text-gray-700 group-hover:text-red-400 group-hover:translate-x-0.5 transition-all" />
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Right: Product Image — stagger in from right */}
+              <div className="flex flex-col lg:flex-row h-full">
+                {/* Left 50% — menu items */}
                 <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.25, duration: 0.5, ease: 'easeOut' }}
-                  className="hidden xl:block w-[340px] shrink-0"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="lg:w-1/2 flex items-center justify-center p-10 lg:p-20"
                 >
-                  <Link href={megamenuData.rightLink} onClick={() => setMegaOpen(false)} className="group block relative rounded-xl overflow-hidden aspect-[4/3] bg-[#0a0a14]">
-                    <img src={megamenuData.rightImg} alt={megamenuData.rightTitle} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <p className="text-[9px] tracking-[0.2em] text-red-400 uppercase font-bold mb-1">FEATURED</p>
-                      <h4 className="text-sm font-bold text-white">{megamenuData.rightTitle}</h4>
-                      <p className="text-[10px] text-gray-400 mt-1">{megamenuData.rightDesc}</p>
-                    </div>
-                  </Link>
+                  <div className="flex gap-12 lg:gap-20 flex-wrap justify-center">
+                    {megamenuData.leftCols.map((col, colIdx) => (
+                      <motion.div
+                        key={col.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.15 + colIdx * 0.1, duration: 0.4, ease: 'easeOut' }}
+                        className="min-w-[140px]"
+                      >
+                        <h3 className="text-[10px] tracking-[0.2em] text-gray-500 uppercase font-bold mb-5">{col.title}</h3>
+                        <div className="space-y-1">
+                          {col.items.map((sub) => (
+                            <Link
+                              key={sub.label}
+                              href={sub.href}
+                              onClick={() => setMegaOpen(false)}
+                              onMouseEnter={() => setHoveredMegaItem(sub.label)}
+                              onMouseLeave={() => setHoveredMegaItem(null)}
+                              className="group flex items-center gap-3 px-3 py-2.5 -mx-3 rounded-lg hover:bg-white/[0.03] transition-colors"
+                            >
+                              <PlusIcon className="w-3.5 h-3.5 text-gray-600 group-hover:text-red-500 transition-colors shrink-0" />
+                              <div className="min-w-0">
+                                <span className="text-sm text-gray-300 group-hover:text-white transition-colors font-medium block truncate">{sub.label}</span>
+                                {sub.desc && <p className="text-[10px] text-gray-600 mt-0.5">{sub.desc}</p>}
+                              </div>
+                              <ChevronRightIcon className="w-3.5 h-3.5 text-gray-700 group-hover:text-red-400 group-hover:translate-x-1 transition-all shrink-0 ml-auto" />
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Right 50% — product showcase */}
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="lg:w-1/2 relative bg-[#0a0a14] overflow-hidden"
+                >
+                  <img src={megamenuData.rightImg} alt={megamenuData.rightTitle} className="absolute inset-0 w-full h-full object-cover opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-16">
+                    <p className="text-[9px] tracking-[0.2em] text-red-400 uppercase font-bold mb-2">FEATURED PRODUCT</p>
+                    <h3 className="text-xl lg:text-2xl font-display font-black text-white mb-2">{megamenuData.rightTitle}</h3>
+                    <p className="text-xs text-gray-400 mb-6">{megamenuData.rightDesc}</p>
+                    <Link href={megamenuData.rightLink} onClick={() => setMegaOpen(false)}
+                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-red-600 hover:bg-red-500 text-white text-xs font-bold rounded-lg tracking-[0.1em] transition-colors">
+                      了解详情 <ChevronRightIcon className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </motion.div>
               </div>
-
-              {/* Bottom bar */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="border-t border-white/[0.03] px-6 lg:px-8 py-3"
-              >
-                <div className="max-w-7xl mx-auto flex items-center justify-between">
-                  <span className="text-[10px] text-gray-600 tracking-wider">全球顶级赛车配件供应商 · 9 大品牌 · 官方授权</span>
-                  <Link href="/products" onClick={() => setMegaOpen(false)} className="text-[10px] text-red-500 hover:text-red-400 font-bold tracking-[0.15em] transition-colors">
-                    查看全部产品 →
-                  </Link>
-                </div>
-              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
