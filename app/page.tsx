@@ -108,9 +108,8 @@ export default function HomePage() {
           </div>
           <div className="flex gap-5 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
             {featuredProducts.map((product, i) => (
-              <motion.div key={product.name} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="flex-none w-[280px] sm:w-[340px] snap-start group cursor-pointer">
-                <Link href={product.href} className="block">
+              <ScrollReveal key={product.name} direction="right" delay={i * 0.1} className="flex-none w-[280px] sm:w-[340px] snap-start">
+                <Link href={product.href} className="group block">
                   <div className="aspect-[4/3] rounded-xl overflow-hidden bg-gray-900 mb-4 relative">
                     <img src={product.img} alt={product.name} className="w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -119,7 +118,7 @@ export default function HomePage() {
                   <h3 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors leading-snug line-clamp-2">{product.name}</h3>
                   <p className="mt-2 text-xs text-gray-500">{product.price}</p>
                 </Link>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -139,7 +138,7 @@ export default function HomePage() {
               { title: '车辆租赁', sub: 'RENTAL', desc: '提供TCR规格赛车的短期和赛季租赁服务。', href: '/services', img: '/images/business/rental.jpg' },
               { title: '赛事支持', sub: 'TRACKSIDE', desc: '工程师团队现场支持，备件、维护、数据分析。', href: '/services', img: '/images/business/race-support.jpg' },
             ].map((item, i) => (
-              <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
+              <ScrollReveal key={item.title} delay={i * 0.12} className="h-full">
                 <Link href={item.href} className="group block h-full bg-[var(--color-card)] rounded-xl border border-white/[0.04] overflow-hidden hover:border-red-500/30 transition-all duration-400">
                   <div className="aspect-[3/2] bg-gray-900 relative overflow-hidden">
                     <img src={item.img} alt={item.title} className="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" />
@@ -147,7 +146,7 @@ export default function HomePage() {
                   </div>
                   <div className="p-5"><h3 className="text-base font-bold text-white">{item.title}</h3><p className="mt-1.5 text-xs text-gray-500 leading-relaxed">{item.desc}</p></div>
                 </Link>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -165,7 +164,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {news.slice(0, 3).map((item, i) => (
-              <motion.div key={item.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+              <ScrollReveal key={item.id} delay={i * 0.1}>
                 <Link href={`/news/${item.id}`} className="group block h-full bg-[var(--color-card)] rounded-xl border border-white/[0.04] overflow-hidden hover:border-red-500/20 transition-all duration-400">
                   <div className="aspect-[16/9] bg-gradient-to-br from-gray-900 to-gray-950 flex items-center justify-center text-4xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,17,0,0.05),transparent_60%)]" />
@@ -179,7 +178,7 @@ export default function HomePage() {
                     <h3 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors line-clamp-2 leading-snug">{item.title}</h3>
                   </div>
                 </Link>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -287,4 +286,11 @@ function BrandsSection() {
       </motion.div>
     </section>
   );
+}
+function ScrollReveal({ children, direction, delay = 0, className = '' }: { children: React.ReactNode; direction?: string; delay?: number; className?: string }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const x = direction === 'right' ? 50 : 0;
+  const y = direction === 'right' ? 0 : 40;
+  return <motion.div ref={ref} initial={{ opacity: 0, x, y }} animate={inView ? { opacity: 1, x: 0, y: 0 } : {}} transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }} className={className}>{children}</motion.div>;
 }
