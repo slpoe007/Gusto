@@ -46,10 +46,18 @@ const statsData = [
   { target: 6, suffix: '', label: '旗下公司', sub: 'ENTITIES' },
 ];
 
+const heroVideos = [
+  { src: '/video/hero-alcon.mp4', type: 'video/mp4', line: 'SPEED · PRECISION · PERFORMANCE' },
+  { src: '/video/hero.mp4', type: 'video/mp4', line: 'ENGINEERED · TO THE CORE' },
+];
+
 export default function HomePage() {
   const [slide, setSlide] = useState(0);
   const nextSlide = useCallback(() => setSlide((s) => (s + 1) % heroSlides.length), []);
   useEffect(() => { const t = setInterval(nextSlide, 6000); return () => clearInterval(t); }, [nextSlide]);
+
+  const [videoIdx, setVideoIdx] = useState(0);
+  useEffect(() => { const t = setInterval(() => setVideoIdx((v) => (v + 1) % heroVideos.length), 6000); return () => clearInterval(t); }, []);
 
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
@@ -69,14 +77,17 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative h-screen min-h-[700px] overflow-hidden">
-        {/* 视频背景 */}
-        <video
-          autoPlay muted loop playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="/images/hero/hero-1.png"
-        >
-          <source src="/video/hero.mp4" type="video/mp4" />
-        </video>
+        {/* 双视频背景交叉淡入淡出 */}
+        {heroVideos.map((v, i) => (
+          <video
+            key={v.src}
+            autoPlay muted loop playsInline
+            className={'absolute inset-0 w-full h-full object-cover transition-opacity duration-1500 ' + (i === videoIdx ? 'opacity-100' : 'opacity-0')}
+            poster="/images/hero/hero-1.png"
+          >
+            <source src={v.src} type={v.type} />
+          </video>
+        ))}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-[var(--color-background)] z-10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(5,5,16,0.7)_100%)] z-10" />
         <div className="absolute bottom-0 left-0 right-0 z-20 pb-16 sm:pb-24">
@@ -84,7 +95,7 @@ export default function HomePage() {
             <div className="hero-content">
               <div className="flex items-center gap-4 mb-6">
                 <span className="hero-pulse-line h-px bg-red-500/60 inline-block" style={{ width: '40px' }} />
-                <span className="text-[10px] sm:text-xs tracking-[0.5em] text-red-400/80 uppercase font-bold">{heroSlides[slide].line}</span>
+                <span className="text-[10px] sm:text-xs tracking-[0.5em] text-red-400/80 uppercase font-bold">{heroVideos[videoIdx].line}</span>
               </div>
               <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black text-white tracking-tight mb-5 leading-none">格时图<span className="text-gradient-fire">赛车配件</span></h1>
               <p className="text-sm sm:text-base text-gray-400/80 max-w-md mb-8 font-light tracking-wide leading-relaxed">代理ALCON、Öhlins、Millers Oils等全球顶级赛车品牌，为中国赛车运动提供专业配件与技术服务。</p>
